@@ -27,7 +27,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: matrix-939bd23
+      - name: matrix-1a8d532
         run: |
           echo "Building on ${{ matrix.os }} with Python ${{ matrix.python-version }}"
           echo "Artifact suffix: ${{ matrix.artifact-suffix }}"
