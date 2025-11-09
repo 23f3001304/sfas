@@ -20,7 +20,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: matrix-939bd23
+      - name: matrix-1a8d532
         run: |
           echo "Building for Python version ${{ matrix.python-version }}"
           echo "Matrix variant: python-${{ matrix.python-version }}"
