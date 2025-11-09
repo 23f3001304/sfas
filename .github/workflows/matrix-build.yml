@@ -1,0 +1,89 @@
+name: Matrix Build with Artifacts
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  matrix-build:
+    name: Build on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11']
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: matrix-939bd23
+        run: |
+          echo "Building for Python version ${{ matrix.python-version }}"
+          echo "Matrix variant: python-${{ matrix.python-version }}"
+      
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      
+      - name: Display Python version
+        run: python --version
+      
+      - name: Generate build artifact
+        run: |
+          echo "Creating build artifact for Python ${{ matrix.python-version }}"
+          cat > build-output.json << EOF
+          {
+            "build_id": "939bd23",
+            "python_version": "${{ matrix.python-version }}",
+            "runner_os": "${{ runner.os }}",
+            "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "github_sha": "${{ github.sha }}",
+            "github_ref": "${{ github.ref }}",
+            "workflow_run": "${{ github.run_number }}",
+            "build_status": "success"
+          }
+          EOF
+          
+          echo "Build artifact created successfully"
+          cat build-output.json
+      
+      - name: Create additional build files
+        run: |
+          mkdir -p build-artifacts
+          echo "Build output for Python ${{ matrix.python-version }}" > build-artifacts/output.txt
+          echo "Build completed at $(date)" >> build-artifacts/output.txt
+          echo "Runner OS: ${{ runner.os }}" >> build-artifacts/output.txt
+          echo "Python version: ${{ matrix.python-version }}" >> build-artifacts/output.txt
+          cp build-output.json build-artifacts/
+          
+          # Create a simple Python script as part of build
+          cat > build-artifacts/version_info.py << 'EOF'
+          import sys
+          import platform
+          
+          print(f"Python version: {sys.version}")
+          print(f"Platform: {platform.platform()}")
+          print(f"Machine: {platform.machine()}")
+          EOF
+          
+          python build-artifacts/version_info.py >> build-artifacts/output.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-939bd23-python${{ matrix.python-version }}
+          path: build-artifacts/
+          retention-days: 30
+          if-no-files-found: error
+      
+      - name: Verify artifact
+        run: |
+          echo "Artifact verification for Python ${{ matrix.python-version }}"
+          ls -la build-artifacts/
+          echo "Artifact size:"
+          du -sh build-artifacts/
