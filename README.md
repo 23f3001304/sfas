@@ -11,58 +11,18 @@
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [Problem Statement](#problem-statement)
-3. [Proposed Solution](#proposed-solution)
-4. [System Architecture](#system-architecture)
-5. [Features](#features)
-6. [Technology Stack](#technology-stack)
-7. [Database Design](#database-design)
-8. [User Roles](#user-roles)
-9. [Installation Guide](#installation-guide)
-10. [Screenshots](#screenshots)
-11. [Future Scope](#future-scope)
-12. [Conclusion](#conclusion)
-
+1. [Problem Statement](#problem-statement)
+2. [Proposed Solution](#proposed-solution)
+3. [System Architecture](#system-architecture)
+4. [Features](#features)
+5. [Technology Stack](#technology-stack)
+6. [Database Design](#database-design)
+7. [User Roles](#user-roles)
+8. [Installation Guide](#installation-guide)
+9. [Conclusion](#conclusion)
+10. [Use of AI] (#ai)
 ---
 
-## Introduction
-
-MediCare+ is a comprehensive hospital management system designed to streamline healthcare operations. The application provides a unified platform for hospital administrators, doctors, and patients to manage appointments, medical records, and hospital resources efficiently.
-
-The system aims to digitize traditional paper-based hospital workflows, reducing manual effort and improving the overall patient experience. It offers role-based access control, ensuring that each user type has access to relevant features and data.
-
----
-
-## Problem Statement
-
-Traditional hospital management faces several challenges:
-
-- Manual appointment booking leads to long waiting times and scheduling conflicts
-- Paper-based medical records are prone to loss and difficult to retrieve
-- Lack of real-time visibility into doctor availability
-- Inefficient communication between hospital staff and patients
-- Difficulty in tracking patient history across multiple visits
-- Administrative overhead in managing doctors and hospital operations
-
-These issues result in poor patient satisfaction, operational inefficiencies, and increased workload for hospital staff.
-
----
-
-## Proposed Solution
-
-MediCare+ addresses these challenges by providing:
-
-- An online appointment booking system with real-time availability
-- Digital medical records accessible to both doctors and patients
-- Automated scheduling based on doctor availability slots
-- Role-based dashboards for administrators, doctors, and patients
-- Patient history tracking for better diagnosis and treatment
-- Admin tools for managing hospital operations efficiently
-
-The system is built as a web application, making it accessible from any device with an internet connection.
-
----
 
 ## System Architecture
 
