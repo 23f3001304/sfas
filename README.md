@@ -11,6 +11,8 @@
 | Framework | Flask 3.0 |
 | Database | SQLite with SQLAlchemy |
 | Frontend | Bootstrap 5.3 |
+| Presentation Video | [click here](https://drive.google.com/file/d/1Gn-bUyU2aLAAokdTYhnGgMZGcwWhSIMQ/view?usp=sharing) |
+
 
 ---
 
@@ -35,11 +37,9 @@
 
 MediCare+ is a comprehensive hospital management system designed to streamline healthcare operations. The application provides a unified platform for hospital administrators, doctors, and patients to manage appointments, medical records, and hospital resources efficiently.
 
-The system aims to digitize traditional paper-based hospital workflows, reducing manual effort and improving the overall patient experience. It offers role-based access control, ensuring that each user type has access to relevant features and data.
-
 ---
 
-## Problem Statement
+## Problem Statement From IITM
 
 Traditional hospital management faces several challenges:
 
@@ -54,18 +54,16 @@ These issues result in poor patient satisfaction, operational inefficiencies, an
 
 ---
 
-## Proposed Solution
+## Proposed Solution From IITM
 
 MediCare+ addresses these challenges by providing:
 
-- An online appointment booking system with real-time availability
+- An appointment booking system with real-time availability
 - Digital medical records accessible to both doctors and patients
 - Automated scheduling based on doctor availability slots
 - Role-based dashboards for administrators, doctors, and patients
 - Patient history tracking for better diagnosis and treatment
 - Admin tools for managing hospital operations efficiently
-
-The system is built as a web application, making it accessible from any device with an internet connection.
 
 ---
 
@@ -686,10 +684,6 @@ Usage in templates:
 ## Conclusion
 
 MediCare+ provides a complete solution for hospital management needs. By digitizing appointment scheduling, medical records, and administrative tasks, the system improves operational efficiency and patient satisfaction.
-
-The modular architecture allows for easy maintenance and future enhancements. The role-based access control ensures data security while providing a tailored experience for each user type.
-
-This project demonstrates the application of modern web development practices using Python Flask, database design principles, and responsive UI frameworks to solve real-world healthcare challenges.
 
 ---
 
