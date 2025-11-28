@@ -1,135 +1,71 @@
 # MediCare+ Hospital Management System
 
-## Project Documentation
+## Project Information
 
-**Project Name:** MediCare+  
-**Developer:** Virendra Jain  
-**Technology:** Python Flask, SQLite, Bootstrap 5  
-**Version:** 1.0  
+| Field | Details |
+|-------|---------|
+| Project Title | MediCare+ Hospital Management System |
+| Developer | Virendra Jain |
+| Roll Number | 23f3004123 |
+| Development Period | 2025 |
+| Framework | Flask 3.0 |
+| Database | SQLite with SQLAlchemy |
+| Frontend | Bootstrap 5.3 |
 
 ---
+
 
 ## Table of Contents
 
-1. [Problem Statement](#problem-statement)
-2. [Proposed Solution](#proposed-solution)
-3. [System Architecture](#system-architecture)
+1. [Introduction](#introduction)
+2. [Problem Statement](#problem-statement)
+3. [Proposed Solution](#proposed-solution)
 4. [Features](#features)
 5. [Technology Stack](#technology-stack)
-6. [Database Design](#database-design)
-7. [User Roles](#user-roles)
-8. [Installation Guide](#installation-guide)
-9. [Conclusion](#conclusion)
-10. [Use of AI] (#ai)
+6. [Project Structure](#project-structure)
+7. [Database Design](#database-design)
+8. [User Roles](#user-roles)
+9. [Installation Guide](#installation-guide)
+10. [Key Code Implementations](#key-code-implementations)
+11. [Conclusion](#conclusion)
+
 ---
 
+## Introduction
 
-## System Architecture
+MediCare+ is a comprehensive hospital management system designed to streamline healthcare operations. The application provides a unified platform for hospital administrators, doctors, and patients to manage appointments, medical records, and hospital resources efficiently.
 
-The application follows a three-tier architecture:
+The system aims to digitize traditional paper-based hospital workflows, reducing manual effort and improving the overall patient experience. It offers role-based access control, ensuring that each user type has access to relevant features and data.
 
-### Architecture Diagram
+---
 
-```mermaid
-graph TB
-    subgraph "Presentation Layer"
-        A[Web Browser]
-        B[HTML5/CSS3/Bootstrap]
-        C[JavaScript]
-        D[Jinja2 Templates]
-    end
-    
-    subgraph "Application Layer"
-        E[Flask 3.0 Framework]
-        F[Flask-Login]
-        G[Flask-SQLAlchemy]
-        H[Werkzeug Security]
-    end
-    
-    subgraph "Data Layer"
-        I[(SQLite Database)]
-        J[SQLAlchemy ORM]
-    end
-    
-    A --> B
-    B --> D
-    C --> D
-    D --> E
-    E --> F
-    E --> G
-    E --> H
-    G --> J
-    J --> I
-    
-    style A fill:#e3f2fd
-    style E fill:#fff3e0
-    style I fill:#e8f5e9
-```
+## Problem Statement
 
-### Component Interaction
+Traditional hospital management faces several challenges:
 
-```mermaid
-graph LR
-    subgraph "Client"
-        A[Browser]
-    end
-    
-    subgraph "Server"
-        B[Flask Routes]
-        C[Decorators]
-        D[Models]
-    end
-    
-    subgraph "Database"
-        E[(SQLite)]
-    end
-    
-    A -->|HTTP Request| B
-    B --> C
-    C --> D
-    D -->|SQLAlchemy| E
-    E -->|Data| D
-    D --> B
-    B -->|HTML Response| A
-```
+- Manual appointment booking leads to long waiting times and scheduling conflicts
+- Paper-based medical records are prone to loss and difficult to retrieve
+- Lack of real-time visibility into doctor availability
+- Inefficient communication between hospital staff and patients
+- Difficulty in tracking patient history across multiple visits
+- Administrative overhead in managing doctors and hospital operations
 
-### Presentation Layer
-- HTML5, CSS3, Bootstrap 5.3 for responsive UI
-- JavaScript for client-side interactivity
-- Jinja2 templating for dynamic content rendering
+These issues result in poor patient satisfaction, operational inefficiencies, and increased workload for hospital staff.
 
-### Application Layer
-- Flask 3.0 web framework
-- Flask-Login for authentication management
-- Flask-SQLAlchemy for database operations
-- Werkzeug for password hashing
+---
 
-### Data Layer
-- SQLite database for data persistence
-- SQLAlchemy ORM for database abstraction
+## Proposed Solution
 
-### Request-Response Flow
+MediCare+ addresses these challenges by providing:
 
-```mermaid
-sequenceDiagram
-    participant B as Browser
-    participant R as Flask Router
-    participant D as Decorator
-    participant C as Controller
-    participant M as Model
-    participant DB as Database
-    
-    B->>R: HTTP Request
-    R->>D: Route Match
-    D->>D: Check Auth/Role
-    D->>C: Execute Handler
-    C->>M: Query/Update
-    M->>DB: SQL Operation
-    DB-->>M: Result
-    M-->>C: Objects
-    C-->>R: Render Template
-    R-->>B: HTML Response
-```
+- An online appointment booking system with real-time availability
+- Digital medical records accessible to both doctors and patients
+- Automated scheduling based on doctor availability slots
+- Role-based dashboards for administrators, doctors, and patients
+- Patient history tracking for better diagnosis and treatment
+- Admin tools for managing hospital operations efficiently
+
+The system is built as a web application, making it accessible from any device with an internet connection.
 
 ---
 
@@ -196,6 +132,86 @@ sequenceDiagram
 |------------|---------|
 | SQLite 3 | Lightweight relational database |
 | SQLAlchemy | Object-relational mapping |
+
+---
+
+## Project Structure
+
+The application follows a well-organized directory structure for maintainability and scalability:
+
+```
+Project_Hospital/
+│
+├── app.py                      # Main Flask application entry point
+├── config.py                   # Configuration settings
+├── requirements.txt            # Python dependencies
+├── README.md                   # Project documentation
+├── MediCare_Plus_Documentation.md  # Detailed project report
+│
+├── instance/
+│   └── hms.db                  # SQLite database (auto-generated)
+│
+├── static/
+│   ├── css/
+│   │   └── style.css           # Custom styles and MediCare+ theme
+│   ├── js/
+│   │   └── script.js           # Frontend interactions and utilities
+│   └── images/                 # Static images and assets
+│
+├── templates/
+│   ├── base.html               # Base layout with sidebar and navbar
+│   ├── login.html              # Universal login page
+│   ├── register.html           # Patient registration form
+│   │
+│   ├── admin/
+│   │   ├── dashboard.html      # Admin statistics dashboard
+│   │   ├── manage_doctors.html # Doctor management interface
+│   │   ├── doctor_form.html    # Add/Edit doctor form
+│   │   ├── patients.html       # Patient list with blacklist feature
+│   │   └── appointments.html   # All appointments overview
+│   │
+│   ├── doctor/
+│   │   ├── dashboard.html      # Doctor's daily schedule
+│   │   ├── availability.html   # Manage time slots
+│   │   ├── appointments.html   # Doctor's appointments list
+│   │   ├── view_appointment.html   # Appointment details
+│   │   └── treatment.html      # Add diagnosis and prescription
+│   │
+│   ├── patient/
+│   │   ├── dashboard.html      # Patient home with upcoming appointments
+│   │   ├── doctors.html        # Browse doctors by specialization
+│   │   ├── book_appointment.html   # Appointment booking interface
+│   │   ├── appointments.html   # Patient's appointments history
+│   │   ├── medical_history.html    # Past medical records
+│   │   └── profile.html        # Patient profile management
+│   │
+│   └── errors/
+│       ├── 404.html            # Page not found
+│       └── 500.html            # Server error
+│
+└── utils/
+    ├── models.py               # SQLAlchemy database models
+    └── db_manager.py           # Database initialization utilities
+```
+
+### Directory Descriptions
+
+| Directory | Purpose |
+|-----------|---------|
+| `instance/` | Contains the SQLite database file, auto-created on first run |
+| `static/` | Static assets including CSS, JavaScript, and images |
+| `templates/` | Jinja2 HTML templates organized by user role |
+| `utils/` | Utility modules for database models and helpers |
+
+### Key Files
+
+| File | Description |
+|------|-------------|
+| `app.py` | Contains all Flask routes, decorators, and application logic |
+| `config.py` | Database URI, secret key, and environment configurations |
+| `models.py` | SQLAlchemy ORM models for all database entities |
+| `style.css` | Custom MediCare+ theme with Bootstrap overrides |
+| `script.js` | Toast notifications, sidebar toggle, and form utilities |
 
 ---
 
@@ -282,42 +298,6 @@ erDiagram
     APPOINTMENT ||--|| MEDICAL_RECORD : "generates"
 ```
 
-### Application Flow Diagram
-
-```mermaid
-flowchart TD
-    A[User Access] --> B{Authenticated?}
-    B -->|No| C[Login Page]
-    B -->|Yes| D{User Role}
-    
-    C --> E{Role Selection}
-    E -->|Admin| F[Admin Login]
-    E -->|Doctor| G[Doctor Login]
-    E -->|Patient| H[Patient Login/Register]
-    
-    F --> I[Admin Dashboard]
-    G --> J[Doctor Dashboard]
-    H --> K[Patient Dashboard]
-    
-    I --> L[Manage Doctors]
-    I --> M[Manage Patients]
-    I --> N[View Appointments]
-    
-    J --> O[Set Availability]
-    J --> P[View Appointments]
-    J --> Q[Treat Patients]
-    Q --> R[Create Medical Record]
-    
-    K --> S[Browse Doctors]
-    K --> T[Book Appointment]
-    K --> U[View History]
-    K --> V[Medical Records]
-    
-    style I fill:#e1f5fe
-    style J fill:#e8f5e9
-    style K fill:#fff3e0
-```
-
 ### User Authentication Flow
 
 ```mermaid
@@ -339,22 +319,6 @@ sequenceDiagram
     F->>L: Create User Session
     L-->>F: Session Created
     F-->>U: Redirect to Dashboard
-```
-
-### Appointment Booking Flow
-
-```mermaid
-flowchart LR
-    A[Patient] --> B[Select Doctor]
-    B --> C[View Available Slots]
-    C --> D[Select Date & Time]
-    D --> E[Enter Reason]
-    E --> F[Confirm Booking]
-    F --> G[Appointment Created]
-    G --> H[Slot Marked Booked]
-    
-    style A fill:#fff3e0
-    style G fill:#e8f5e9
 ```
 
 ### Entity Descriptions
@@ -455,19 +419,6 @@ flowchart LR
    ```
    http://localhost:5000
    ```
-
----
-
-## Screenshots
-
-The application features a modern, responsive design with the following key interfaces:
-
-- Login and Registration pages with clean form layouts
-- Admin dashboard with statistics cards and data tables
-- Doctor dashboard with appointment calendar
-- Patient portal with doctor search and booking interface
-- Medical records view with prescription details
-- Responsive sidebar navigation
 
 ---
 
@@ -732,23 +683,6 @@ Usage in templates:
 
 ---
 
-## Future Scope
-
-The following enhancements are planned for future versions:
-
-1. **Email Notifications** - Appointment reminders and confirmation emails
-2. **SMS Integration** - Text message alerts for appointments
-3. **Payment Gateway** - Online payment for consultations
-4. **Video Consultation** - Telemedicine support for remote appointments
-5. **Prescription PDF** - Downloadable prescription documents
-6. **Analytics Dashboard** - Detailed reports and insights for administrators
-7. **Multi-language Support** - Interface translation for wider accessibility
-8. **Mobile Application** - Native apps for iOS and Android
-9. **Lab Integration** - Connection with laboratory systems for test results
-10. **Insurance Module** - Insurance claim processing and verification
-
----
-
 ## Conclusion
 
 MediCare+ provides a complete solution for hospital management needs. By digitizing appointment scheduling, medical records, and administrative tasks, the system improves operational efficiency and patient satisfaction.
@@ -759,15 +693,8 @@ This project demonstrates the application of modern web development practices us
 
 ---
 
-## Project Information
 
-**Project Title:** MediCare+ Hospital Management System  
-**Developer:** Virendra Jain  
-**Development Period:** 2025  
-**Framework:** Flask 3.0  
-**Database:** SQLite with SQLAlchemy  
-**Frontend:** Bootstrap 5.3  
 
----
+## AI Usage Declaration
 
-*This documentation is prepared as part of the MediCare+ Hospital Management System project.*
+This project incorporates approximately 10-15% AI assistance, primarily utilized for the design.
